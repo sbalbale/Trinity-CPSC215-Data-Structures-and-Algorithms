@@ -5,7 +5,7 @@
 
   &#xa0;
 
-  <!-- <a href="https://northeasterncs2510fundamentalsofcomputerscience2.netlify.app">Demo</a> -->
+  <!-- <a href="https://TrinityCPSC215DataStructuresandAlgorithms.netlify.app">Demo</a> -->
 </div>
 
 <h1 align="center">Trinity CPSC215 Data Structures and Algorithms</h1>
@@ -29,7 +29,7 @@
 <!-- Status -->
 
 <!-- <h4 align="center"> 
-	🚧  Northeastern CS2510 Fundamentals Of Computer Science 2 🚀 Under construction...  🚧
+	🚧  Trinity CPSC215 Data Structures and Algorithms 🚀 Under construction...  🚧
 </h4> 
 
 <hr> -->
@@ -69,7 +69,7 @@ $ cd Trinity-CPSC215-Data-Structures-and-Algorithms
 
 ## :memo: License ##
 
-This project is under license from Apache. For more details, see the [LICENSE](LICENSE.md) file.
+This project is under license from MIT. For more details, see the [LICENSE](LICENSE.md) file.
 
 
 Made by <a href="https://github.com/sbalbale" target="_blank">Sean Balbale</a>
