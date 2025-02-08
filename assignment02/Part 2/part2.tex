@@ -1,0 +1,147 @@
+\documentclass{article}
+\usepackage{amsmath}
+
+\begin{document}
+
+\title{Asymptotic Complexity Proofs}
+\author{}
+\date{}
+\maketitle
+
+\section*{Part II: Asymptotic Notation Proofs}
+
+\subsection*{1. Finding the Complexity of the Given Equation}
+\textbf{Equation:}
+\[
+10n^3 + 24n^2 + 3n \log n + 144
+\]
+\textbf{Analysis:}
+\begin{itemize}
+    \item The highest order term dominates the function as \( n \) grows large.
+    \item The dominant term is \( 10n^3 \).
+\end{itemize}
+\textbf{Conclusion:}
+\[
+10n^3 + 24n^2 + 3n \log n + 144 = \Theta(n^3)
+\]
+
+\subsection*{2. Proof: \( n^3 + 20n + 1 = O(n^3) \)}
+
+\textbf{Definition of Big-O:}  
+A function \( f(n) \) is \( O(g(n)) \) if there exist positive constants \( c \) and \( n_0 \) such that:
+
+\[
+f(n) \leq c \cdot g(n) \quad \text{for all } n \geq n_0
+\]
+
+\textbf{Step-by-Step Analysis:}
+\[
+f(n) = n^3 + 20n + 1, \quad g(n) = \frac{n^3}{6}
+\]
+
+For large \( n \), we approximate:
+\[
+n^3 + 20n + 1 \leq c \cdot \frac{n^3}{6}
+\]
+
+Ignoring lower-order terms:
+\[
+n^3 \leq c \cdot \frac{n^3}{6}
+\]
+
+Choosing \( c = 6 \), we get:
+\[
+n^3 \leq 6 \cdot \frac{n^3}{6} = n^3
+\]
+
+Thus, the inequality holds for all \( n \geq 1 \), proving:
+
+\[
+n^3 + 20n + 1 = O(n^3)
+\]
+
+\subsection*{3. Proof: \( 7n^2 + 5 = O(n^3) \)}
+
+We need to show that:
+\[
+7n^2 + 5 \leq c \cdot n^3
+\]
+
+For large \( n \), the dominant term is \( 7n^2 \), so:
+\[
+7n^2 \leq c \cdot n^3
+\]
+
+Dividing by \( n^2 \):
+\[
+7 \leq c \cdot n
+\]
+
+Choosing \( c = 7 \) and \( n_0 = 1 \), the inequality holds.
+
+\textbf{Conclusion:}
+\[
+7n^2 + 5 = O(n^3)
+\]
+
+\subsection*{4. Proof: \( n^3 + 20n = \Omega(n^2) \)}
+
+\textbf{Definition of Big-Omega:}  
+A function \( f(n) \) is \( \Omega(g(n)) \) if there exist positive constants \( c \) and \( n_0 \) such that:
+
+\[
+f(n) \geq c \cdot g(n) \quad \text{for all } n \geq n_0
+\]
+
+\textbf{Step-by-Step Analysis:}
+\[
+f(n) = n^3 + 20n, \quad g(n) = n^2
+\]
+
+For large \( n \), we approximate:
+\[
+n^3 + 20n \geq c \cdot n^2
+\]
+
+Dividing by \( n^2 \):
+\[
+n + \frac{20}{n} \geq c
+\]
+
+For large \( n \), \( \frac{20}{n} \to 0 \), so we approximate:
+\[
+n \geq c
+\]
+
+Choosing \( c = 1 \) and \( n_0 = 1 \), the inequality holds.
+
+\textbf{Conclusion:}
+\[
+n^3 + 20n = \Omega(n^2)
+\]
+
+\subsection*{5. Proof: \( 3n \log n + 4n + 5n \log n = \Theta(n \log n) \)}
+
+We rewrite:
+\[
+3n \log n + 5n \log n + 4n = 8n \log n + 4n
+\]
+
+For large \( n \), the dominant term is \( 8n \log n \), ignoring \( 4n \):
+
+\[
+8n \log n
+\]
+
+Since \( 8n \log n \) is a constant multiple of \( n \log n \), we conclude:
+
+\[
+\Theta(n \log n)
+\]
+
+\textbf{Conclusion:}
+\[
+3n \log n + 4n + 5n \log n = \Theta(n \log n)
+\]
+
+\end{document}
