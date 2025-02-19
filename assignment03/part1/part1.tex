@@ -1,0 +1,144 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage[margin=1in]{geometry}
+
+\title{Conversion of Infix Expressions to Prefix and Postfix Notations}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section*{Part I: Converting Infix Expressions}
+
+\subsection*{Expression (a)}
+\textbf{Infix Expression:}
+\[
+    A + \frac{B}{C} \times (D - A)^{F^{H}}
+\]
+
+\subsubsection*{Step 1: Identify the Main Operator}
+\begin{itemize}[label=$\bullet$]
+    \item The main operator is the addition ($+$) which splits the expression into:
+          \[
+              A \quad \text{and} \quad \frac{B}{C} \times (D - A)^{F^{H}}.
+          \]
+\end{itemize}
+
+\subsubsection*{Step 2: Parse the Right Part}
+\begin{itemize}[label=$\bullet$]
+    \item In the subexpression $\frac{B}{C} \times (D - A)^{F^{H}}$, division ($/$) has higher precedence than multiplication.
+          \begin{itemize}[label=$\circ$]
+              \item First, compute $B/C$.
+          \end{itemize}
+    \item Next, consider $(D - A)^{F^{H}}$:
+          \begin{itemize}[label=$\circ$]
+              \item Compute $D-A$ within the parentheses.
+              \item Since exponentiation ($\wedge$) is right-associative, compute $F^H$ first.
+              \item Then compute $(D-A)^{(F^H)}$.
+          \end{itemize}
+\end{itemize}
+
+Thus, the overall structure is:
+\[
+    A + \biggl[ \bigl(\frac{B}{C}\bigr) \times \bigl((D-A)^{(F^{H})}\bigr) \biggr]
+\]
+
+\subsubsection*{Step 3: Conversion to Prefix Notation}
+\begin{itemize}[label=$\bullet$]
+    \item The main operator ($+$) is written first.
+    \item The left operand is $A$.
+    \item The right operand is the multiplication operator:
+          \begin{itemize}[label=$\circ$]
+              \item Left operand: division $/\,B\,C$
+              \item Right operand: exponentiation, where the base is $(D-A)$ and the exponent is $F^H$ 
+          \end{itemize}
+\end{itemize}
+
+The resulting prefix expression is:
+\[
+    + A * / B C \wedge - D A \wedge F H
+\]
+
+\subsubsection*{Step 4: Conversion to Postfix Notation}
+\begin{itemize}[label=$\bullet$]
+    \item $B/C$ converts to postfix as: $B\,C\,/$
+    \item $D-A$ converts to postfix as: $D\,A\,-$
+    \item $F^H$ converts to postfix as: $F\,H\,\wedge$
+    \item Then, $(D-A)^{F^H}$ converts to: $D\,A\,-\,F\,H\,\wedge\,\wedge$
+    \item The multiplication becomes: $B\,C\,/\,D\,A\,-\,F\,H\,\wedge\,\wedge\,*$
+    \item Finally, adding $A$ gives:
+          \[
+              A\,B\,C\,/\,D\,A\,-\,F\,H\,\wedge\,\wedge\,*\,+
+          \]
+\end{itemize}
+
+\newpage
+\subsection*{Expression (b)}
+\textbf{Infix Expression:}
+\[
+    \Bigl((P+R) \times Q\Bigr)^{\frac{X}{(Y+Z)}}
+\]
+
+\subsubsection*{Step 1: Identify the Main Operator}
+\begin{itemize}[label=$\bullet$]
+    \item The main operator is the exponentiation ($\wedge$) operator with:
+          \begin{itemize}[label=$\circ$]
+              \item Left operand: $((P+R) \times Q)$
+              \item Right operand: $\frac{X}{(Y+Z)}$
+          \end{itemize}
+\end{itemize}
+
+\subsubsection*{Step 2: Break Down Each Part}
+\begin{itemize}[label=$\bullet$]
+    \item \textbf{Left Side:}
+          \begin{itemize}[label=$\circ$]
+              \item Evaluate $P+R$ inside the parentheses.
+              \item Multiply the result by $Q$.
+          \end{itemize}
+    \item \textbf{Right Side:}
+          \begin{itemize}[label=$\circ$]
+              \item Evaluate $Y+Z$ within the parentheses.
+              \item Divide $X$ by the result.
+          \end{itemize}
+\end{itemize}
+
+\subsubsection*{Step 3: Conversion to Prefix Notation}
+\begin{itemize}[label=$\bullet$]
+    \item For the left part:
+          \begin{itemize}[label=$\circ$]
+              \item $P+R$ in prefix is: $+\,P\,R$
+              \item Multiplying by $Q$ gives: $*\,+\,P\,R\,Q$
+          \end{itemize}
+    \item For the right part:
+          \begin{itemize}[label=$\circ$]
+              \item $Y+Z$ in prefix is: $+\,Y\,Z$
+              \item Then $X/(Y+Z)$ becomes: $/\,X\,+\,Y\,Z$
+          \end{itemize}
+    \item The overall prefix expression is:
+          \[
+              \wedge\,*\,+\,P\,R\,Q\,/\,X\,+\,Y\,Z
+          \]
+\end{itemize}
+
+\subsubsection*{Step 4: Conversion to Postfix Notation}
+\begin{itemize}[label=$\bullet$]
+    \item For the left part:
+          \begin{itemize}[label=$\circ$]
+              \item $P+R$ in postfix is: $P\,R\,+$
+              \item Multiplying by $Q$ gives: $P\,R\,+\,Q\,*$
+          \end{itemize}
+    \item For the right part:
+          \begin{itemize}[label=$\circ$]
+              \item $Y+Z$ in postfix is: $Y\,Z\,+$
+              \item Then $X/(Y+Z)$ becomes: $X\,Y\,Z\,+\,/$
+          \end{itemize}
+    \item The overall postfix expression is:
+          \[
+              P\,R\,+\,Q\,*\,X\,Y\,Z\,+\,/\,\wedge
+          \]
+\end{itemize}
+
+\end{document}
