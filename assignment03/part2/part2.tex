@@ -1,0 +1,120 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage[margin=1in]{geometry}
+\title{Evaluation of Postfix and Prefix Expressions}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section*{Part II: Evaluation of Expressions}
+
+\subsection*{Expression (a) --- Postfix}
+\textbf{Postfix Expression:}
+\[
+4\ 5\ +\ 10\ \times\ 6\ 2\ \div\ -
+\]
+
+\textbf{Step-by-Step Evaluation:}
+\begin{enumerate}[label=\textbf{Step \arabic*:}, leftmargin=*]
+    \item \textbf{Push} 4. \quad \textit{Stack:} [4]
+    \item \textbf{Push} 5. \quad \textit{Stack:} [4, 5]
+    \item \textbf{Operator \(+\):} Pop 5 and 4; compute \(4+5=9\); push 9. \quad \textit{Stack:} [9]
+    \item \textbf{Push} 10. \quad \textit{Stack:} [9, 10]
+    \item \textbf{Operator \(\times\):} Pop 10 and 9; compute \(9 \times 10=90\); push 90. \quad \textit{Stack:} [90]
+    \item \textbf{Push} 6. \quad \textit{Stack:} [90, 6]
+    \item \textbf{Push} 2. \quad \textit{Stack:} [90, 6, 2]
+    \item \textbf{Operator \(\div\):} Pop 2 and 6; compute \(6\div 2=3\); push 3. \quad \textit{Stack:} [90, 3]
+    \item \textbf{Operator \(-\):} Pop 3 and 90; compute \(90-3=87\); push 87. \quad \textit{Stack:} [87]
+\end{enumerate}
+
+\textbf{Final Result:} \(\boxed{87}\)
+
+\newpage
+\subsection*{Expression (b) --- Postfix}
+\textbf{Postfix Expression:}
+\[
+3\ 4\ \times\ (5\ 6\ -)\ 2\ 3\ +\ \times
+\]
+
+\textbf{Step-by-Step Evaluation:}
+\begin{enumerate}[label=\textbf{Step \arabic*:}, leftmargin=*]
+    \item \textbf{Push} 3. \quad \textit{Stack:} [3]
+    \item \textbf{Push} 4. \quad \textit{Stack:} [3, 4]
+    \item \textbf{Operator \(\times\):} Pop 4 and 3; compute \(3 \times 4 = 12\); push 12. \quad \textit{Stack:} [12]
+    \item \textbf{Subexpression \((5\ 6\ -)\):} 
+    \begin{enumerate}[label=\(\bullet\)]
+        \item \textbf{Push} 5.
+        \item \textbf{Push} 6.
+        \item \textbf{Operator \(-\):} Pop 6 and 5; compute \(5-6=-1\); push \(-1\).
+    \end{enumerate}
+    \quad \textit{Stack now:} [12, \(-1\)]
+    \item \textbf{Push} 2. \quad \textit{Stack:} [12, \(-1\), 2]
+    \item \textbf{Push} 3. \quad \textit{Stack:} [12, \(-1\), 2, 3]
+    \item \textbf{Operator \(+\):} Pop 3 and 2; compute \(2+3=5\); push 5. \quad \textit{Stack:} [12, \(-1\), 5]
+    \item \textbf{Operator \(\times\):} Pop 5 and \(-1\); compute \((-1) \times 5 = -5\); push \(-5\). \quad \textit{Stack:} [12, \(-5\)]
+    \item \textbf{Final Operator \(\times\):} Pop \(-5\) and 12; compute \(12 \times (-5) = -60\); push \(-60\). \quad \textit{Stack:} [\(-60\)]
+\end{enumerate}
+
+\textbf{Final Result:} \(\boxed{-60}\)
+
+\newpage
+\subsection*{Expression (c) --- Prefix}
+\textbf{Prefix Expression:}
+\[
+- \;29\; +\; 5\; *\; 4\; 6
+\]
+
+\textbf{Step-by-Step Evaluation:}
+\begin{enumerate}[label=\textbf{Step \arabic*:}, leftmargin=*]
+    \item The first token is the subtraction operator \(-\), which requires two operands.
+    \item \textbf{First operand:} \(29\).
+    \item \textbf{Second operand:} Evaluate the subexpression starting with \(+\):
+    \begin{enumerate}[label=\(\bullet\)]
+        \item The operator \(+\) requires two operands: the first is \(5\) and the second is the subexpression \( *\; 4\; 6\).
+        \item \textbf{Evaluate} \( *\; 4\; 6\): Multiply \(4\) and \(6\) to get \(24\).
+        \item Now compute \(5 + 24 = 29\).
+    \end{enumerate}
+    \item Finally, compute the subtraction: \(29 - 29 = 0\).
+\end{enumerate}
+
+\textbf{Final Result:} \(\boxed{0}\)
+
+\newpage
+\subsection*{Expression (d) --- Prefix}
+\textbf{Prefix Expression:}
+\[
+\times\; 5\; \div\; 6\; +\; 6\; \times\; 3\; 2
+\]
+
+\textbf{Step-by-Step Evaluation:}
+\begin{enumerate}[label=\textbf{Step \arabic*:}, leftmargin=*]
+    \item The first token is the multiplication operator \(\times\). It requires two operands:
+    \begin{enumerate}[label=\(\bullet\)]
+        \item \textbf{First operand:} \(5\).
+        \item \textbf{Second operand:} The subexpression starting with \(\div\).
+    \end{enumerate}
+    \item \textbf{Evaluate} the subexpression \(\div\; 6\; +\; 6\; \times\; 3\; 2\):
+    \begin{enumerate}[label=\(\bullet\)]
+        \item The operator \(\div\) requires two operands:
+        \begin{enumerate}[label=\(\circ\)]
+            \item \textbf{First operand:} \(6\).
+            \item \textbf{Second operand:} Evaluate the subexpression starting with \(+\).
+        \end{enumerate}
+        \item \textbf{Evaluate} the subexpression \(+\; 6\; \times\; 3\; 2\):
+        \begin{enumerate}[label=\(\circ\)]
+            \item The operator \(+\) requires two operands: the first is \(6\) and the second is the subexpression \( \times\; 3\; 2\).
+            \item \textbf{Evaluate} \(\times\; 3\; 2\): Multiply \(3\) and \(2\) to get \(6\).
+            \item Now compute \(6 + 6 = 12\).
+        \end{enumerate}
+        \item Now, with the subexpression evaluated, compute the division: \(6 \div 12 = 0.5\).
+    \end{enumerate}
+    \item Finally, compute the initial multiplication: \(5 \times 0.5 = 2.5\).
+\end{enumerate}
+
+\textbf{Final Result:} \(\boxed{2.5}\)
+
+\end{document}
