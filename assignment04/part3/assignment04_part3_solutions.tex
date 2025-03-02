@@ -1,60 +1,236 @@
 \documentclass{article}
 \usepackage{amsmath}
-\usepackage{amssymb}
 \usepackage{graphicx}
-\usepackage{algorithm}
-\usepackage{algpseudocode}
-\usepackage{listings}
-\usepackage{xcolor}
+\usepackage{verbatim}
 
-\title{CPSC 215: Data Structures and Algorithms}
-\author{Your Name}
+\title{Solutions to Assignment 4 - Part III: Working with Trees}
+\author{Sean Balbale}
 \date{\today}
-
-\lstset{
-  basicstyle=\ttfamily\small,
-  commentstyle=\color{green!50!black},
-  keywordstyle=\color{blue},
-  stringstyle=\color{red},
-  showstringspaces=false,
-  breaklines=true
-}
 
 \begin{document}
 
 \maketitle
+\newpage
+\section{Problem 1: Pre-order and Post-order Traversal}
 
-\section*{Assignment 4 - Part 3 Solutions}
+\textbf{Given Tree:}
+\begin{verbatim}
+        j
+       / | \
+      f  c  e
+     /   /  |  \
+    d   a   h   i
+   /          |
+  g           b
+\end{verbatim}
 
-% Add your solutions to part 3 here
-% Example structure:
+\textbf{Pre-order Traversal (Root → Left → Right):}
+\[
+j, f, d, g, c, a, e, h, b, i
+\]
 
-\subsection*{Problem 1}
-% Your answer here
+\textbf{Post-order Traversal (Left → Right → Root):}
+\[
+g, d, f, a, c, b, h, i, e, j
+\]
 
-\subsection*{Problem 2}
-% Your answer here
+---
 
-% For code snippets, use:
-\begin{lstlisting}[language=Java]
-// Java code here
-\end{lstlisting}
+\section{Problem 2: Expression Tree for Polynomial}
 
-% For algorithms:
-\begin{algorithm}
-\caption{Algorithm Name}
-\begin{algorithmic}[1]
-\State Initialize variables
-\For{each element}
-    \State Do something
-\EndFor
-\end{algorithmic}
-\end{algorithm}
+Given polynomial:
+\[
+5y^2 - 3y + 2
+\]
 
-% For mathematical expressions:
-\begin{align}
-T(n) &= 2T(n/2) + O(n)\\
-&= O(n\log n)
-\end{align}
+\subsection{(a) Prefix Expression (Pre-order)}
+\[
++ - * 5 ^ y 2 * 3 y 2
+\]
+
+\subsection{(b) Postfix Expression (Post-order)}
+\[
+5 y 2 ^ * 3 y * - 2 +
+\]
+
+\textbf{Expression Tree:}
+\begin{verbatim}
+        (+)
+       /   \
+     (-)    2
+    /   \
+  (*)   (*)
+ /   \   /   \
+5   (^) 3   y
+    /   \
+   y     2
+\end{verbatim}
+
+---
+
+\section{Problem 3: Constructing a Binary Tree}
+
+\textbf{Given Traversals:}
+- Preorder: \texttt{EXAMFUN}
+- Inorder: \texttt{MAFXUEN}
+
+\textbf{Constructed Tree:}
+\begin{verbatim}
+        E
+       /  \
+      A    X
+     /    /  \
+    M    U    N
+     \
+      F
+\end{verbatim}
+
+---
+
+\section{Problem 4: Binary Search Tree Traversals}
+
+\textbf{Given BST:}
+\begin{verbatim}
+        100
+       /   \
+     20     200
+    /  \    /   \
+  10   30  150   300
+\end{verbatim}
+
+\textbf{Pre-order Traversal:}  
+\[
+100, 20, 10, 30, 200, 150, 300
+\]
+
+\textbf{In-order Traversal (Sorted Order):}  
+\[
+10, 20, 30, 100, 150, 200, 300
+\]
+
+\textbf{Post-order Traversal:}  
+\[
+10, 30, 20, 150, 300, 200, 100
+\]
+
+---
+
+\section{Problem 5: Transforming a Tree into a BST}
+
+\textbf{Given Tree:}
+\begin{verbatim}
+        "easy"
+       /       \
+   "in"     "november"
+      \       /         \
+    "can"  "be"     "quizzes"
+           /
+        "fun"
+\end{verbatim}
+
+\textbf{(a) Pre-order Traversal:}  
+\[
+\text{"easy", "in", "can", "november", "be", "fun", "quizzes"}
+\]
+
+\textbf{(b) Post-order Traversal:}  
+\[
+\text{"can", "in", "fun", "be", "quizzes", "november", "easy"}
+\]
+
+\textbf{(c) Balanced BST:}
+\begin{verbatim}
+        "easy"
+       /       \
+   "can"     "november"
+   /           /        \
+"be"      "in"   "quizzes"
+           /
+        "fun"
+\end{verbatim}
+
+---
+
+\section{Problem 6: Constructing a Binary Tree from Traversals}
+
+\textbf{Given Traversals:}
+- In-order: \texttt{DBEAFC}
+- Pre-order: \texttt{ABDECF}
+
+\textbf{Constructed Tree:}
+\begin{verbatim}
+      A
+     /  \
+    B    C
+   / \    \
+  D   E    F
+\end{verbatim}
+
+\textbf{Post-order Traversal:}  
+\[
+D, E, B, F, C, A
+\]
+
+\textbf{Possible BSTs of Height 2:}
+\begin{verbatim}
+      C
+     /   \
+    B     E
+   / \   / \
+  A   D F
+\end{verbatim}
+
+---
+
+\section{Problem 7: Preorder vs. Postorder Relationship}
+
+\textbf{Can preorder and postorder be the same?}  
+No, unless it is a single-node tree.
+
+\textbf{Can preorder be the reverse of postorder?}  
+Yes, in a completely linear tree:
+\begin{verbatim}
+    A
+     \
+      B
+       \
+        C
+         \
+          D
+\end{verbatim}
+where \textbf{Preorder} = `A B C D` and \textbf{Postorder} = `D C B A`.
+
+---
+
+\section{Problem 8: General Tree Representation as a Binary Tree}
+
+\textbf{Given General Tree \( T \) and Converted Binary Tree \( T' \):}
+
+\begin{verbatim}
+(a) General Tree T:
+        A
+       / | \
+      B  C  D
+     / \
+    E   F
+       
+(b) Binary Tree T':
+        A
+       /
+      B
+     /  \
+    E    C
+     \     \
+      F     D
+\end{verbatim}
+
+\subsection{(a) Is a preorder traversal of \( T' \) equivalent to a preorder traversal of \( T \)?}  
+Yes.
+
+\subsection{(b) Is a postorder traversal of \( T' \) equivalent to a postorder traversal of \( T \)?}  
+Yes.
+
+\subsection{(c) Is an inorder traversal of \( T' \) equivalent to a standard traversal of \( T \)?}  
+No.
 
 \end{document}
