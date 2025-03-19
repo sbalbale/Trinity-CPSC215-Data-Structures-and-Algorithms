@@ -1,0 +1,400 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage[margin=1in]{geometry}
+\begin{document}
+
+\title{Part II: Hashing and Hash Tables}
+\author{Sean Balbale}
+\date{}
+\maketitle
+
+\section*{Part (a): Quadratic Probing}
+
+We are given a 10-slot closed hash table (slots 0 through 9) and the hash function 
+\[
+h(k)= k \mod 10.
+\]
+We wish to insert the following keys using quadratic probing:
+\[
+5,\quad 12,\quad 8,\quad 20,\quad 14,\quad 7.
+\]
+Quadratic probing uses the probe sequence:
+\[
+h(k),\quad h(k)+1^2,\quad h(k)+2^2,\quad h(k)+3^2,\quad \dots \quad (\text{all mod }10).
+\]
+However, notice that for these keys the initial hash locations are all distinct:
+\begin{enumerate}[label=\textbf{Step \arabic*:}, leftmargin=1.8cm]
+    \item \textbf{Insert 5:} 
+    \[
+    h(5)=5 \mod 10 = 5.
+    \]
+    Slot 5 is empty, so place 5 in slot 5.
+    \item \textbf{Insert 12:} 
+    \[
+    h(12)=12 \mod 10 = 2.
+    \]
+    Slot 2 is empty, so place 12 in slot 2.
+    \item \textbf{Insert 8:} 
+    \[
+    h(8)=8 \mod 10 = 8.
+    \]
+    Slot 8 is empty, so place 8 in slot 8.
+    \item \textbf{Insert 20:} 
+    \[
+    h(20)=20 \mod 10 = 0.
+    \]
+    Slot 0 is empty, so place 20 in slot 0.
+    \item \textbf{Insert 14:} 
+    \[
+    h(14)=14 \mod 10 = 4.
+    \]
+    Slot 4 is empty, so place 14 in slot 4.
+    \item \textbf{Insert 7:} 
+    \[
+    h(7)=7 \mod 10 = 7.
+    \]
+    Slot 7 is empty, so place 7 in slot 7.
+\end{enumerate}
+
+Thus, the final hash table is:
+
+\bigskip
+\begin{center}
+\begin{tabular}{c|c}
+\textbf{Slot} & \textbf{Key} \\ \midrule
+0 & 20 \\
+1 & --- \\
+2 & 12 \\
+3 & --- \\
+4 & 14 \\
+5 & 5 \\
+6 & --- \\
+7 & 7 \\
+8 & 8 \\
+9 & --- \\
+\end{tabular}
+\end{center}
+\bigskip
+
+\section*{Part (b): Double Hashing}
+
+Now we use a 10-slot hash table with the following two hash functions:
+\[
+\text{Primary: } h(k)= k \mod 10,\quad \text{Secondary: } h_2(k)=7 - (k \mod 7).
+\]
+The keys to insert are the same: 
+\[
+5,\quad 12,\quad 8,\quad 20,\quad 14,\quad 7.
+\]
+Double hashing uses the probe sequence:
+\[
+h(k),\quad h(k)+h_2(k),\quad h(k)+2\cdot h_2(k),\quad \dots \quad (\text{all mod }10).
+\]
+We insert the keys as follows:
+\begin{enumerate}[label=\textbf{Step \arabic*:}, leftmargin=1.8cm]
+    \item \textbf{Insert 5:} 
+    \[
+    h(5)=5 \mod 10 = 5.
+    \]
+    Slot 5 is empty; insert 5.
+    \item \textbf{Insert 12:} 
+    \[
+    h(12)=12 \mod 10 = 2.
+    \]
+    Slot 2 is empty; insert 12.
+    \item \textbf{Insert 8:} 
+    \[
+    h(8)=8 \mod 10 = 8.
+    \]
+    Slot 8 is empty; insert 8.
+    \item \textbf{Insert 20:} 
+    \[
+    h(20)=20 \mod 10 = 0.
+    \]
+    Slot 0 is empty; insert 20.
+    \item \textbf{Insert 14:} 
+    \[
+    h(14)=14 \mod 10 = 4.
+    \]
+    Slot 4 is empty; insert 14.
+    \item \textbf{Insert 7:} 
+    \[
+    h(7)=7 \mod 10 = 7.
+    \]
+    Slot 7 is empty; insert 7.
+\end{enumerate}
+
+No collisions occurred in the primary hash positions; hence the final table is identical to part (a):
+
+\bigskip
+\begin{center}
+\begin{tabular}{c|c}
+\textbf{Slot} & \textbf{Key} \\ \midrule
+0 & 20 \\
+1 & --- \\
+2 & 12 \\
+3 & --- \\
+4 & 14 \\
+5 & 5 \\
+6 & --- \\
+7 & 7 \\
+8 & 8 \\
+9 & --- \\
+\end{tabular}
+\end{center}
+\bigskip
+
+\section*{Part (c): Double Hashing with Custom Hash Functions in a 13-Slot Table}
+
+We now have a 13-slot hash table (slots 0 through 12). The keys to insert are:
+\[
+2,\quad 8,\quad 31,\quad 20,\quad 19,\quad 18,\quad 53,\quad 27.
+\]
+The hash functions are defined as:
+\[
+H_1(k)= k \mod 13,
+\]
+\[
+H_2(k)= \text{Rev}(k+1) \mod 11,
+\]
+where $\text{Rev}(n)$ reverses the decimal digits of $n$. (For example, $\text{Rev}(37)=73$, and $\text{Rev}(7)=7$.)
+
+\begin{enumerate}[label=\textbf{Step \arabic*:}, leftmargin=1.8cm]
+    \item \textbf{Key 2:} 
+    \[
+    H_1(2)=2 \mod 13 = 2.
+    \]
+    Compute 
+    \[
+    H_2(2)=\text{Rev}(2+1)=\text{Rev}(3)=3 \quad \Rightarrow\quad 3 \mod 11=3.
+    \]
+    Slot 2 is empty; insert 2 at slot 2.
+    
+    \item \textbf{Key 8:} 
+    \[
+    H_1(8)=8 \mod 13 = 8.
+    \]
+    Compute 
+    \[
+    H_2(8)=\text{Rev}(8+1)=\text{Rev}(9)=9 \quad \Rightarrow\quad 9 \mod 11=9.
+    \]
+    Slot 8 is empty; insert 8 at slot 8.
+    
+    \item \textbf{Key 31:} 
+    \[
+    H_1(31)=31 \mod 13 = 5.
+    \]
+    Compute 
+    \[
+    H_2(31)=\text{Rev}(31+1)=\text{Rev}(32)=23,\quad 23 \mod 11 = 1.
+    \]
+    Slot 5 is empty; insert 31 at slot 5.
+    
+    \item \textbf{Key 20:} 
+    \[
+    H_1(20)=20 \mod 13 = 7.
+    \]
+    Compute 
+    \[
+    H_2(20)=\text{Rev}(20+1)=\text{Rev}(21)=12,\quad 12 \mod 11 = 1.
+    \]
+    Slot 7 is empty; insert 20 at slot 7.
+    
+    \item \textbf{Key 19:} 
+    \[
+    H_1(19)=19 \mod 13 = 6.
+    \]
+    Compute 
+    \[
+    H_2(19)=\text{Rev}(19+1)=\text{Rev}(20)=2,\quad 2 \mod 11=2.
+    \]
+    Slot 6 is empty; insert 19 at slot 6.
+    
+    \item \textbf{Key 18:} 
+    \[
+    H_1(18)=18 \mod 13 = 5.
+    \]
+    Slot 5 is already occupied (with 31). Now compute 
+    \[
+    H_2(18)=\text{Rev}(18+1)=\text{Rev}(19)=91,\quad 91 \mod 11 = 91-88=3.
+    \]
+    Use the double hashing probe sequence:
+    \begin{itemize}
+        \item First probe: index \(5\) (occupied).
+        \item Second probe: index \( (5+3) \mod 13 = 8\) (occupied).
+        \item Third probe: index \( (5+2\cdot3) \mod 13 = (5+6)=11\) (empty).
+    \end{itemize}
+    Insert 18 at slot 11.
+    
+    \item \textbf{Key 53:} 
+    \[
+    H_1(53)=53 \mod 13 = 1.
+    \]
+    Compute 
+    \[
+    H_2(53)=\text{Rev}(53+1)=\text{Rev}(54)=45,\quad 45 \mod 11 = 1.
+    \]
+    Slot 1 is empty; insert 53 at slot 1.
+    
+    \item \textbf{Key 27:} 
+    \[
+    H_1(27)=27 \mod 13 = 1.
+    \]
+    Slot 1 is occupied (by 53). Now compute 
+    \[
+    H_2(27)=\text{Rev}(27+1)=\text{Rev}(28)=82,\quad 82 \mod 11 = 82-77=5.
+    \]
+    Probe sequence:
+    \begin{itemize}
+        \item First probe: index \(1\) (occupied).
+        \item Second probe: index \( (1+5) \mod 13 = 6\) (occupied).
+        \item Third probe: index \( (1+2\cdot5) \mod 13 = 11\) (occupied).
+        \item Fourth probe: index \( (1+3\cdot5) \mod 13 = 16 \mod 13 = 3\) (empty).
+    \end{itemize}
+    Insert 27 at slot 3.
+\end{enumerate}
+
+The final hash table is:
+
+\bigskip
+\begin{center}
+\begin{tabular}{c|c}
+\textbf{Slot} & \textbf{Key} \\ \midrule
+0  & --- \\
+1  & 53 \\
+2  & 2 \\
+3  & 27 \\
+4  & --- \\
+5  & 31 \\
+6  & 19 \\
+7  & 20 \\
+8  & 8 \\
+9  & --- \\
+10 & --- \\
+11 & 18 \\
+12 & --- \\
+\end{tabular}
+\end{center}
+\bigskip
+
+\section*{Part (d): Pseudo-Random Probing}
+
+We now use a 10-slot hash table with the hash function 
+\[
+h(k)= k \mod 10,
+\]
+and pseudo-random probing using the permutation of offsets:
+\[
+5,\quad 9,\quad 2,\quad 1,\quad 4,\quad 8,\quad 6,\quad 3,\quad 7.
+\]
+The keys to insert are:
+\[
+3,\quad 12,\quad 9,\quad 2,\quad 79,\quad 44.
+\]
+
+\subsection*{Insertion Steps}
+
+\begin{enumerate}[label=\textbf{Step \arabic*:}, leftmargin=1.8cm]
+    \item \textbf{Insert 3:} 
+    \[
+    h(3)=3 \mod 10 = 3.
+    \]
+    Slot 3 is empty; insert 3 in slot 3.
+    
+    \item \textbf{Insert 12:} 
+    \[
+    h(12)=12 \mod 10 = 2.
+    \]
+    Slot 2 is empty; insert 12 in slot 2.
+    
+    \item \textbf{Insert 9:} 
+    \[
+    h(9)=9 \mod 10 = 9.
+    \]
+    Slot 9 is empty; insert 9 in slot 9.
+    
+    \item \textbf{Insert 2:} 
+    \[
+    h(2)=2 \mod 10 = 2,
+    \]
+    but slot 2 is occupied (by 12). Apply the pseudo-random probe offsets:
+    \begin{itemize}
+        \item First offset: \(5\). New index: \((2+5) \mod 10 = 7\). Slot 7 is empty; insert 2 at slot 7.
+    \end{itemize}
+    
+    \item \textbf{Insert 79:} 
+    \[
+    h(79)=79 \mod 10 = 9,
+    \]
+    but slot 9 is occupied (by 9). Probe:
+    \begin{itemize}
+        \item First offset: \(5\). New index: \((9+5) \mod 10 = 4\). Slot 4 is empty; insert 79 at slot 4.
+    \end{itemize}
+    
+    \item \textbf{Insert 44:} 
+    \[
+    h(44)=44 \mod 10 = 4,
+    \]
+    but slot 4 is occupied (by 79). Probe:
+    \begin{itemize}
+        \item First offset: \(5\). New index: \((4+5) \mod 10 = 9\) (occupied).
+        \item Second offset: \(9\). New index: \((4+9) \mod 10 = 13 \mod 10 = 3\) (occupied).
+        \item Third offset: \(2\). New index: \((4+2) \mod 10 = 6\) (empty).
+    \end{itemize}
+    Insert 44 at slot 6.
+\end{enumerate}
+
+The final hash table is:
+
+\bigskip
+\begin{center}
+\begin{tabular}{c|c}
+\textbf{Slot} & \textbf{Key} \\ \midrule
+0 & --- \\
+1 & --- \\
+2 & 12 \\
+3 & 3 \\
+4 & 79 \\
+5 & --- \\
+6 & 44 \\
+7 & 2 \\
+8 & --- \\
+9 & 9 \\
+\end{tabular}
+\end{center}
+\bigskip
+
+\subsection*{Probability That an Empty Slot Will Be Next Filled}
+
+After inserting 44, the empty slots are: 0, 1, 5, and 8. Assume that for the next key the initial hash value, \(r=h(\text{new key})\), is uniformly distributed over \(\{0,1,\ldots,9\}\). The probing sequence for a new key (after its hash \(r\)) is:
+\[
+r,\quad r+5,\quad r+9,\quad r+2,\quad r+1,\quad r+4,\quad r+8,\quad r+6,\quad r+3,\quad r+7\quad (\text{mod }10).
+\]
+
+We analyze, for each starting \(r\), which empty slot is encountered first (given our table occupancy):
+
+\begin{itemize}
+    \item \textbf{\(r=0\):} Sequence: \(0\) (empty) \(\to\) \textbf{slot 0} is chosen.
+    \item \textbf{\(r=1\):} Sequence: \(1\) (empty) \(\to\) \textbf{slot 1} is chosen.
+    \item \textbf{\(r=2\):} Sequence: \(2\) (filled), \(2+5=7\) (filled), \(2+9=11 \mod 10=1\) (empty) \(\to\) \textbf{slot 1}.
+    \item \textbf{\(r=3\):} Sequence: \(3\) (filled), \(3+5=8\) (empty) \(\to\) \textbf{slot 8}.
+    \item \textbf{\(r=4\):} Sequence: \(4\) (filled), \(4+5=9\) (filled), \(4+9=13 \mod 10=3\) (filled), \(4+2=6\) (filled), \(4+1=5\) (empty) \(\to\) \textbf{slot 5}.
+    \item \textbf{\(r=5\):} Sequence: \(5\) (empty) \(\to\) \textbf{slot 5}.
+    \item \textbf{\(r=6\):} Sequence: \(6\) (filled), \(6+5=11 \mod 10=1\) (empty) \(\to\) \textbf{slot 1}.
+    \item \textbf{\(r=7\):} Sequence: \(7\) (filled), \(7+5=12 \mod 10=2\) (filled), \(7+9=16 \mod 10=6\) (filled), \(7+2=9\) (filled), \(7+1=8\) (empty) \(\to\) \textbf{slot 8}.
+    \item \textbf{\(r=8\):} Sequence: \(8\) (empty) \(\to\) \textbf{slot 8}.
+    \item \textbf{\(r=9\):} Sequence: \(9\) (filled), \(9+5=14 \mod 10=4\) (filled), \(9+9=18 \mod 10=8\) (empty) \(\to\) \textbf{slot 8}.
+\end{itemize}
+
+Since the initial hash \(r\) is uniformly distributed, each value occurs with probability \(1/10\). We tally the outcomes:
+\begin{itemize}
+    \item \(\textbf{Slot 0:}\) Occurs when \(r=0\) \(\Rightarrow\) probability \(= \frac{1}{10}=0.1.\)
+    \item \(\textbf{Slot 1:}\) Occurs when \(r=1,2,6\) \(\Rightarrow\) probability \(= \frac{3}{10}=0.3.\)
+    \item \(\textbf{Slot 5:}\) Occurs when \(r=4,5\) \(\Rightarrow\) probability \(= \frac{2}{10}=0.2.\)
+    \item \(\textbf{Slot 8:}\) Occurs when \(r=3,7,8,9\) \(\Rightarrow\) probability \(= \frac{4}{10}=0.4.\)
+\end{itemize}
+
+
+\end{document}
