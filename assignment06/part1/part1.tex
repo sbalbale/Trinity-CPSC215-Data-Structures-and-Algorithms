@@ -1,0 +1,116 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{array}
+
+\begin{document}
+
+\section*{Part I: Huffman Encoding}
+
+\subsection*{Given Frequencies}
+\[
+\begin{array}{c|c}
+\text{Character} & \text{Frequency} \\
+\hline
+e & 34 \\
+r & 22 \\
+s & 24 \\
+t & 28 \\
+n & 15 \\
+l & 10 \\
+i & 9  \\
+z & 8  \\
+\end{array}
+\]
+
+\subsection*{Huffman Tree Construction}
+
+\begin{enumerate}
+  \item Combine $z(8)$ and $i(9)$ to form node $A(17)$.
+  \item Combine $l(10)$ and $n(15)$ to form node $B(25)$.
+  \item Combine $A(17)$ and $r(22)$ to form node $C(39)$.
+  \item Combine $s(24)$ and $B(25)$ to form node $D(49)$.
+  \item Combine $t(28)$ and $e(34)$ to form node $E(62)$.
+  \item Combine $C(39)$ and $D(49)$ to form node $F(88)$.
+  \item Combine $E(62)$ and $F(88)$ to form root $G(150)$.
+\end{enumerate}
+
+\subsection*{Huffman Codes}
+Assigning 0 and 1 down each branch, we get:
+
+\[
+\begin{array}{c|c}
+\text{Character} & \text{Code} \\
+\hline
+t & 00 \\
+e & 01 \\
+z & 1000 \\
+i & 1001 \\
+r & 101 \\
+s & 110 \\
+l & 1110 \\
+n & 1111 \\
+\end{array}
+\]
+
+\subsection*{Total Bits vs.\ ASCII}
+
+\paragraph{Huffman-Encoded Bits.}
+\[
+\begin{aligned}
+& e(34)\times2 = 68, \quad
+r(22)\times3 = 66, \quad
+s(24)\times3 = 72, \\
+& t(28)\times2 = 56, \quad
+n(15)\times4 = 60, \quad
+l(10)\times4 = 40, \\
+& i(9)\times4 = 36, \quad
+z(8)\times4 = 32. \\
+& \text{Total Huffman bits } = 68 + 66 + 72 + 56 + 60 + 40 + 36 + 32 = 430.
+\end{aligned}
+\]
+
+\paragraph{ASCII Bits.}
+Each character would use $8$ bits, so for $150$ characters:
+\[
+150 \times 8 = 1200 \text{ bits}.
+\]
+
+\paragraph{Bits Saved.}
+\[
+1200 - 430 = 770 \text{ bits saved in total}.
+\]
+
+\subsection*{Encoding Sample Words}
+
+\begin{itemize}
+  \item \textbf{``next''}:
+  \[
+  n = 1111,\quad e = 01,\quad x\ (\text{or }z)=1000,\quad t=00
+  \]
+  \[
+  \text{``next''} = 1111\,01\,1000\,00 = 111101100000.
+  \]
+
+  \item \textbf{``stern''}:
+  \[
+  s = 110,\quad t = 00,\quad e = 01,\quad r = 101,\quad n = 1111
+  \]
+  \[
+  \text{``stern''} = 110\,00\,01\,101\,1111 = 11000011011111.
+  \]
+
+  \item \textbf{``nertzrents''}:
+  \[
+  n=1111,\ e=01,\ r=101,\ t=00,\ z=1000,\ r=101,\ e=01,\ n=1111,\ t=00,\ s=110
+  \]
+  \[
+  \text{``nertzrents''} = 1111\,01\,101\,00\,1000\,101\,01\,1111\,00\,110
+  \]
+  \[
+  = 11110110100100010101111100110.
+  \]
+\end{itemize}
+
+\end{document}
