@@ -1,0 +1,85 @@
+Data Structure,"Number of Elements (N)",Operation,Actual Completion Time (ns)
+AVL Tree,1000,Insert N Elements,2621000
+AVL Tree,1000,Delete N/2 Elements,1920600
+AVL Tree,1000,Search N/2 Elements,1394200
+BST,1000,Insert N Elements,1486400
+BST,1000,Delete N/2 Elements,567000
+BST,1000,Search N/2 Elements,565900
+Hash Table,1000,Insert N Elements,353300
+Hash Table,1000,Delete N/2 Elements,318400
+Hash Table,1000,Search N/2 Elements,120800
+Queues,1000,Insert N Elements,2142600
+Queues,1000,Delete N/2 Elements,56800
+Queues,1000,Search N/2 Elements,3027900
+Stacks,1000,Insert N Elements,1913700
+Stacks,1000,Delete N/2 Elements,71600
+Stacks,1000,Search N/2 Elements,41600
+Splay Tree,1000,Insert N Elements,1946500
+Splay Tree,1000,Delete N/2 Elements,331900
+Splay Tree,1000,Search N/2 Elements,255500
+Heaps,1000,Insert N Elements,565100
+Heaps,1000,Delete N/2 Elements,930900
+Heaps,1000,Search N/2 Elements,3457700
+AVL Tree,10000,Insert N Elements,2775100
+AVL Tree,10000,Delete N/2 Elements,4048200
+AVL Tree,10000,Search N/2 Elements,1738200
+BST,10000,Insert N Elements,2188400
+BST,10000,Delete N/2 Elements,2095500
+BST,10000,Search N/2 Elements,2012800
+Hash Table,10000,Insert N Elements,1574500
+Hash Table,10000,Delete N/2 Elements,743000
+Hash Table,10000,Search N/2 Elements,1106500
+Queues,10000,Insert N Elements,592600
+Queues,10000,Delete N/2 Elements,288100
+Queues,10000,Search N/2 Elements,61156900
+Stacks,10000,Insert N Elements,802000
+Stacks,10000,Delete N/2 Elements,155000
+Stacks,10000,Search N/2 Elements,154300
+Splay Tree,10000,Insert N Elements,3571500
+Splay Tree,10000,Delete N/2 Elements,2807900
+Splay Tree,10000,Search N/2 Elements,2126300
+Heaps,10000,Insert N Elements,2910200
+Heaps,10000,Delete N/2 Elements,3025100
+Heaps,10000,Search N/2 Elements,40887300
+AVL Tree,100000,Insert N Elements,15297200
+AVL Tree,100000,Delete N/2 Elements,5595500
+AVL Tree,100000,Search N/2 Elements,2279800
+BST,100000,Insert N Elements,11369300
+BST,100000,Delete N/2 Elements,5935400
+BST,100000,Search N/2 Elements,4326200
+Hash Table,100000,Insert N Elements,23814500
+Hash Table,100000,Delete N/2 Elements,3395000
+Hash Table,100000,Search N/2 Elements,1838700
+Queues,100000,Insert N Elements,1328300
+Queues,100000,Delete N/2 Elements,489000
+Queues,100000,Search N/2 Elements,748295300
+Stacks,100000,Insert N Elements,8240800
+Stacks,100000,Delete N/2 Elements,1851700
+Stacks,100000,Search N/2 Elements,2615000
+Splay Tree,100000,Insert N Elements,52249700
+Splay Tree,100000,Delete N/2 Elements,12447300
+Splay Tree,100000,Search N/2 Elements,10321200
+Heaps,100000,Insert N Elements,6613400
+Heaps,100000,Delete N/2 Elements,20776100
+Heaps,100000,Search N/2 Elements,3562273900
+AVL Tree,500000,Insert N Elements,60873700
+AVL Tree,500000,Delete N/2 Elements,6574500
+AVL Tree,500000,Search N/2 Elements,670900
+BST,500000,Insert N Elements,56134400
+BST,500000,Delete N/2 Elements,5413100
+BST,500000,Search N/2 Elements,1204100
+Hash Table,500000,Insert N Elements,591998200
+Hash Table,500000,Delete N/2 Elements,5209700
+Hash Table,500000,Search N/2 Elements,1355800
+Queues,500000,Insert N Elements,1362500
+Queues,500000,Delete N/2 Elements,558000
+Queues,500000,Search N/2 Elements,3629739800
+Stacks,500000,Insert N Elements,3177400
+Stacks,500000,Delete N/2 Elements,1029900
+Stacks,500000,Search N/2 Elements,415300
+Splay Tree,500000,Insert N Elements,256943200
+Splay Tree,500000,Delete N/2 Elements,18046700
+Splay Tree,500000,Search N/2 Elements,1451700
+Heaps,500000,Insert N Elements,16051100
+Heaps,500000,Delete N/2 Elements,177466400
+Heaps,500000,Search N/2 Elements,338193050400
