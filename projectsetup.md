@@ -1,7 +1,7 @@
 
 # Create a new project:
 
-Open your Command Prompt (Windows)/Terminal (Mac). Navigate to the folder you're organizing all your Fundies 2 projects in using the following command:
+Open your Command Prompt (Windows)/Terminal (Mac). Navigate to the folder you're organizing all your projects in using the following command:
 ```
 cd [path to your folder]
 ```
